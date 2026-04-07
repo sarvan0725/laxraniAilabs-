@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'">
+<title>LaxRani AI Labs | Sarthak Srivastav</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#001f26",
+                    "on-surface": "#e5e2e1",
+                    "surface-tint": "#d0bcff",
+                    "tertiary-container": "#e14ef6",
+                    "error-container": "#93000a",
+                    "secondary": "#4cd7f6",
+                    "on-primary-fixed-variant": "#5516be",
+                    "on-primary-fixed": "#23005c",
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "secondary-fixed-dim": "#4cd7f6",
+                    "tertiary-fixed-dim": "#fbabff",
+                    "on-tertiary-fixed": "#36003e",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-container": "#4d0059",
+                    "secondary-fixed": "#acedff",
+                    "primary-fixed-dim": "#d0bcff",
+                    "surface-container-highest": "#353534",
+                    "inverse-primary": "#6d3bd7",
+                    "on-tertiary": "#580065",
+                    "primary-fixed": "#e9ddff",
+                    "tertiary-fixed": "#ffd6fd",
+                    "on-surface-variant": "#cbc3d7",
+                    "surface": "#131313",
+                    "surface-variant": "#353534",
+                    "on-secondary-container": "#00424e",
+                    "primary-container": "#a078ff",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#1c1b1b",
+                    "tertiary": "#fbabff",
+                    "background": "#131313",
+                    "surface-container-high": "#2a2a2a",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-dim": "#131313",
+                    "inverse-surface": "#e5e2e1",
+                    "on-primary-container": "#340080",
+                    "outline": "#958ea0",
+                    "outline-variant": "#494454",
+                    "on-error": "#690005",
+                    "on-secondary": "#003640",
+                    "on-primary": "#3c0091",
+                    "on-tertiary-fixed-variant": "#7c008e",
+                    "surface-bright": "#3a3939",
+                    "surface-container": "#201f1f",
+                    "primary": "#d0bcff",
+                    "inverse-on-surface": "#313030",
+                    "on-background": "#e5e2e1",
+                    "secondary-container": "#03b5d3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #131313; color: #e5e2e1; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+        .text-gradient { background: linear-gradient(135deg, #d0bcff 0%, #a078ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary/30 selection:text-primary">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-xl shadow-2xl shadow-on-surface/5">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-bold tracking-tight text-on-surface font-headline">LaxRani AI Labs</div>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label text-[0.75rem] uppercase tracking-[0.1em]" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label text-[0.75rem] uppercase tracking-[0.1em]" href="#about">About</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label text-[0.75rem] uppercase tracking-[0.1em]" href="#projects">Projects</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label text-[0.75rem] uppercase tracking-[0.1em]" href="#services">Services</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label text-[0.75rem] uppercase tracking-[0.1em]" href="#contact">Contact</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-300 font-label text-[0.75rem] uppercase tracking-[0.1em]" href="client-portal.html">Client Portal</a>
+</div>
+<a href="https://wa.me/918081782267?text=Hi%20Sarthak%2C%20I%20want%20to%20hire%20you!" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-label text-[0.75rem] uppercase tracking-[0.1em] font-bold hover:shadow-[0_0_20px_rgba(208,188,255,0.4)] active:scale-95 transition-all duration-200">
+                Hire Me
+            </a>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative pt-40 pb-32 px-8 min-h-screen flex items-center justify-center">
+<!-- Background Glows -->
+<div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] -z-10"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-secondary/15 rounded-full blur-[120px] -z-10"></div>
+<div class="max-w-5xl w-full text-center">
+<span class="inline-block font-label text-tertiary text-[0.75rem] uppercase tracking-[0.2em] mb-6 px-4 py-1.5 rounded-full border border-outline-variant/20 bg-surface-variant/10">Next-Gen Intelligence</span>
+<h1 class="font-headline text-5xl md:text-[3.5rem] font-extrabold leading-tight tracking-[-0.04em] mb-8">
+                    Building <span class="text-gradient">AI-powered</span><br/>Web &amp; App Solutions
+                </h1>
+<p class="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto mb-12 leading-[1.6]">
+                    I help startups and businesses grow with modern tech stacks, transforming complex ideas into fluid digital experiences.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+<button class="w-full sm:w-auto bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-10 py-4 rounded-xl font-bold font-headline shadow-lg hover:shadow-[0_0_30px_rgba(208,188,255,0.3)] transition-all">
+                        View Projects
+                    </button>
+<a href="https://wa.me/918081782267?text=Hi%20Sarthak%2C%20I%20want%20to%20hire%20you!" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-10 py-4 rounded-xl font-bold font-headline border border-outline-variant/30 hover:bg-surface-variant/20 transition-all backdrop-blur-md text-center">
+                        Hire Me
+                    </a>
+</div>
+</div>
+</section>
+<!-- Services Section (Bento Style) -->
+<section id="services" class="py-32 px-8 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto">
+<div class="mb-20 text-center md:text-left">
+<h2 class="font-headline text-3xl font-bold mb-4">Core Expertise</h2>
+<p class="text-on-surface-variant font-body">Harnessing the power of modern engineering.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Web Dev -->
+<div onclick="openServicesModal()" class="md:col-span-2 group relative p-8 rounded-3xl bg-surface-container-high overflow-hidden border border-outline-variant/10 cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-4xl text-primary mb-6">language</span>
+<h3 class="font-headline text-xl font-bold mb-3">Web Development</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Building performant, SEO-optimized web applications using React, Next.js, and modern CSS frameworks.</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-variant/30 rounded-full text-[10px] uppercase font-bold tracking-widest text-on-surface">React</span>
+<span class="px-3 py-1 bg-surface-variant/30 rounded-full text-[10px] uppercase font-bold tracking-widest text-on-surface">Next.js</span>
+<span class="px-3 py-1 bg-surface-variant/30 rounded-full text-[10px] uppercase font-bold tracking-widest text-on-surface">Node</span>
+</div>
+</div>
+<!-- App Dev -->
+<div onclick="openServicesModal()" class="group relative p-8 rounded-3xl bg-surface-container-high border border-outline-variant/10 cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-secondary mb-6">smartphone</span>
+<h3 class="font-headline text-xl font-bold mb-3">App Development</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Native-feel cross-platform mobile apps that users love.</p>
+</div>
+<!-- AI Integration -->
+<div onclick="openServicesModal()" class="group relative p-8 rounded-3xl bg-surface-container-high border border-outline-variant/10 cursor-pointer">
+<span class="material-symbols-outlined text-4xl text-tertiary mb-6">psychology</span>
+<h3 class="font-headline text-xl font-bold mb-3">AI Integration</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">LLM agents and custom AI workflows for automation.</p>
+</div>
+<!-- Admin Panel -->
+<div onclick="openServicesModal()" class="md:col-span-4 group relative p-8 rounded-3xl glass-card bg-surface-variant/10 border border-outline-variant/15 flex flex-col md:flex-row items-center gap-8 cursor-pointer">
+<div class="md:w-1/2">
+<span class="material-symbols-outlined text-4xl text-on-secondary-fixed-variant mb-6">dashboard_customize</span>
+<h3 class="font-headline text-2xl font-bold mb-3">Admin Panels &amp; CMS</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Custom-tailored backend interfaces to give you absolute control over your business data with real-time analytics.</p>
+</div>
+<div class="md:w-1/2 w-full h-48 bg-surface-container-highest rounded-2xl overflow-hidden shadow-inner relative">
+<img class="w-full h-full object-cover mix-blend-luminosity opacity-40 group-hover:opacity-60 transition-opacity" data-alt="clean dark mode dashboard interface with complex data charts and abstract glass widgets" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIo-HXEJ6ak95wBCgKir3shDSouLKQz5sdHLIq1Yf-hKnM1-XKnfURtucuixp9JbM-YJX2NstHwqP4ijZ6BcihqOGjupvFfZAA3bQLULlDjQRVkDk0cbY-vh47VvHjZLUIuDL33ft4aWhJ8Mj_PW0WFREXfzv8nUkjRroKHHtJ7AImd95CPVU710oRyyQHi3rWTjvjbbm3nFjQ-7tsi93pPIvgOYurArV2IU5VSZ2EYE94bfAOv0_RhtEHEzVaiY_4rTR5D-gkW_Y"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Modal -->
+<div id="servicesModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4" onclick="if(event.target===this)closeServicesModal()">
+<div class="bg-surface-container rounded-3xl max-w-2xl w-full p-8 relative border border-outline-variant/20 max-h-[90vh] overflow-y-auto">
+<button onclick="closeServicesModal()" class="absolute top-4 right-4 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">close</span></button>
+<span class="inline-block font-label text-tertiary text-[0.75rem] uppercase tracking-[0.2em] mb-4 px-4 py-1.5 rounded-full border border-outline-variant/20 bg-surface-variant/10">What We Offer</span>
+<h2 class="font-headline text-2xl font-extrabold mb-3">Our Services</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">At LaxRani AI Labs, we provide modern, scalable, and result-driven digital solutions designed to help businesses grow faster and smarter. From idea to execution, we build powerful products that deliver real impact.</p>
+<div class="flex flex-col gap-6 mb-8">
+<div class="p-5 rounded-2xl bg-surface-container-high border border-outline-variant/10">
+<h3 class="font-headline font-bold mb-2">🚀 Web Development</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">We create fast, responsive, and visually stunning websites tailored to your business needs. Whether it's a personal portfolio, business website, or a full-scale web application, we ensure performance, security, and a seamless user experience.</p>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-high border border-outline-variant/10">
+<h3 class="font-headline font-bold mb-2">📱 App Development</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">We develop high-quality mobile and web applications that are scalable, user-friendly, and built with modern technologies. From startup ideas to production-ready apps, we bring your vision to life.</p>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-high border border-outline-variant/10">
+<h3 class="font-headline font-bold mb-2">🤖 AI Integration</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">We integrate AI-powered features into your applications to automate processes, enhance user experience, and give your business a competitive edge. From chatbots to intelligent systems, we build smart solutions.</p>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container-high border border-outline-variant/10">
+<h3 class="font-headline font-bold mb-2">⚙️ Admin Panels &amp; CMS</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">We design and develop powerful admin dashboards and CMS systems that allow you to manage your business efficiently. Easy to use, secure, and fully customizable.</p>
+</div>
+</div>
+<div class="p-5 rounded-2xl bg-primary/10 border border-primary/20 mb-6">
+<h3 class="font-headline font-bold mb-3 text-primary">Why Choose Us?</h3>
+<div class="grid grid-cols-2 gap-2">
+<span class="text-sm text-on-surface-variant">✔ Modern Tech Stack</span>
+<span class="text-sm text-on-surface-variant">✔ Fast Delivery</span>
+<span class="text-sm text-on-surface-variant">✔ Affordable Pricing</span>
+<span class="text-sm text-on-surface-variant">✔ Clean &amp; Scalable Code</span>
+<span class="text-sm text-on-surface-variant col-span-2">✔ Direct Communication &amp; Support</span>
+</div>
+</div>
+<a href="https://wa.me/918081782267?text=Hi%20Sarthak%2C%20I%27d%20like%20to%20discuss%20a%20project!" target="_blank" class="w-full inline-block text-center bg-gradient-to-br from-primary to-primary-container text-on-primary-container py-3 rounded-xl font-bold font-headline">Let's Build Something Amazing 🚀</a>
+</div>
+</div>
+<!-- About Section -->
+<section id="about" class="py-32 px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div class="relative">
+<div class="absolute -top-10 -left-10 w-72 h-72 bg-primary/10 rounded-full blur-[80px] -z-10"></div>
+<div class="w-full aspect-square max-w-sm mx-auto rounded-3xl bg-surface-container-high border border-outline-variant/15 overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-[8rem] text-primary/30">person</span>
+</div>
+</div>
+<div>
+<span class="inline-block font-label text-tertiary text-[0.75rem] uppercase tracking-[0.2em] mb-4 px-4 py-1.5 rounded-full border border-outline-variant/20 bg-surface-variant/10">About Me</span>
+<h2 class="font-headline text-3xl md:text-4xl font-extrabold mb-2">Sarthak Srivastav</h2>
+<p class="text-primary font-bold font-headline text-lg mb-6">Full Stack Web Developer</p>
+<p class="text-on-surface-variant leading-relaxed mb-4 text-sm">I'm Sarthak Srivastav, a passionate Full Stack Developer and the founder of LaxRani AI Labs. I specialize in building modern, scalable, and AI-powered web and mobile applications that help businesses grow and stand out in today's competitive digital world. With a strong focus on clean design, performance, and user experience, I transform complex ideas into simple, effective solutions.</p>
+<p class="text-on-surface-variant leading-relaxed mb-4 text-sm">My mission is to deliver high-quality, affordable, and innovative tech solutions for startups, entrepreneurs, and businesses looking to expand their digital presence. I believe in continuous learning, practical execution, and creating real impact through technology. Whether it's developing a full-scale application, integrating AI features, or building a powerful admin system, I ensure every project is crafted with precision and purpose.</p>
+<p class="text-on-surface-variant leading-relaxed mb-8 text-sm">If you're looking to build something unique and impactful, feel free to connect with me.</p>
+<div class="flex flex-col gap-3">
+<a href="tel:8081782267" class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors text-sm"><span class="material-symbols-outlined text-primary text-lg">phone</span> 8081782267</a>
+<a href="mailto:sarthakmahi345@gmail.com" class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors text-sm"><span class="material-symbols-outlined text-primary text-lg">mail</span> sarthakmahi345@gmail.com</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Projects -->
+<section id="projects" class="py-32 px-8 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
+<div class="max-w-xl">
+<h2 class="font-headline text-3xl md:text-4xl font-extrabold mb-4">Selected Works</h2>
+<p class="text-on-surface-variant">A collection of premium digital experiences crafted with precision.</p>
+</div>
+</div>
+<!-- Filter Tabs -->
+<div class="flex flex-wrap gap-3 mb-12" id="filterTabs">
+<button onclick="filterProjects('all')" class="filter-btn active-filter px-5 py-2 rounded-full font-bold font-label text-[0.75rem] uppercase tracking-widest bg-primary text-on-primary transition-all" data-filter="all">All</button>
+<button onclick="filterProjects('web')" class="filter-btn px-5 py-2 rounded-full font-bold font-label text-[0.75rem] uppercase tracking-widest bg-surface-container-high text-on-surface-variant hover:bg-primary/20 transition-all" data-filter="web">Web</button>
+<button onclick="filterProjects('mobile')" class="filter-btn px-5 py-2 rounded-full font-bold font-label text-[0.75rem] uppercase tracking-widest bg-surface-container-high text-on-surface-variant hover:bg-primary/20 transition-all" data-filter="mobile">Mobile</button>
+<button onclick="filterProjects('ai')" class="filter-btn px-5 py-2 rounded-full font-bold font-label text-[0.75rem] uppercase tracking-widest bg-surface-container-high text-on-surface-variant hover:bg-primary/20 transition-all" data-filter="ai">AI</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12" id="projectsGrid"></div>
+</div>
+</section>
+<!-- Project Modal -->
+<div id="projectModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+<div class="bg-surface-container rounded-3xl max-w-2xl w-full p-8 relative border border-outline-variant/20">
+<button onclick="closeModal()" class="absolute top-4 right-4 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">close</span></button>
+<img id="modalImg" class="w-full aspect-[16/9] object-cover rounded-2xl mb-6"/>
+<div class="flex flex-wrap gap-2 mb-3" id="modalTags"></div>
+<h3 id="modalTitle" class="font-headline text-2xl font-bold mb-2"></h3>
+<p id="modalDesc" class="text-on-surface-variant text-sm leading-relaxed mb-4"></p>
+<div class="flex flex-wrap gap-3">
+<a id="modalLink" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-6 py-2.5 rounded-xl font-bold text-sm">🌐 Live Demo →</a>
+<a id="modalGithub" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 border border-outline-variant/30 text-on-surface px-6 py-2.5 rounded-xl font-bold text-sm hover:bg-surface-variant/20 transition-all">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+GitHub →</a>
+</div>
+</div>
+</div>
+<!-- Testimonials -->
+<section id="reviews" class="py-32 px-8 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-headline text-3xl font-bold text-center mb-4">Voices of Success</h2>
+<!-- Rating Summary -->
+<div class="flex flex-col items-center mb-16">
+<div class="text-6xl font-extrabold font-headline text-primary" id="avgRating">5.0</div>
+<div class="flex gap-1 my-2" id="avgStars"></div>
+<p class="text-on-surface-variant text-sm" id="totalReviews">3 reviews</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="reviewsGrid"></div>
+<!-- Leave a Review -->
+<div class="mt-16 max-w-xl mx-auto p-8 rounded-3xl bg-surface-container border border-outline-variant/15">
+<h3 class="font-headline text-xl font-bold mb-6">Leave a Review</h3>
+<div class="flex gap-2 mb-4" id="starPicker">
+<span class="star-pick cursor-pointer text-3xl text-outline" data-v="1">★</span>
+<span class="star-pick cursor-pointer text-3xl text-outline" data-v="2">★</span>
+<span class="star-pick cursor-pointer text-3xl text-outline" data-v="3">★</span>
+<span class="star-pick cursor-pointer text-3xl text-outline" data-v="4">★</span>
+<span class="star-pick cursor-pointer text-3xl text-outline" data-v="5">★</span>
+</div>
+<input id="rName" placeholder="Your Name" class="w-full mb-3 px-4 py-3 rounded-xl bg-surface-container-high border border-outline-variant/20 text-on-surface text-sm outline-none focus:border-primary"/>
+<input id="rRole" placeholder="Your Role / Company" class="w-full mb-3 px-4 py-3 rounded-xl bg-surface-container-high border border-outline-variant/20 text-on-surface text-sm outline-none focus:border-primary"/>
+<textarea id="rText" placeholder="Your review..." rows="3" class="w-full mb-4 px-4 py-3 rounded-xl bg-surface-container-high border border-outline-variant/20 text-on-surface text-sm outline-none focus:border-primary resize-none"></textarea>
+<button onclick="submitReview()" class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-container py-3 rounded-xl font-bold font-headline">Submit Review</button>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section id="contact" class="py-32 px-8 bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+<!-- Left Info -->
+<div>
+<span class="inline-block font-label text-tertiary text-[0.75rem] uppercase tracking-[0.2em] mb-4 px-4 py-1.5 rounded-full border border-outline-variant/20 bg-surface-variant/10">Get In Touch</span>
+<h2 class="font-headline text-3xl md:text-4xl font-extrabold mb-4">Contact Me</h2>
+<p class="text-on-surface-variant leading-relaxed mb-4 text-sm">Have an idea or project in mind? Let's connect and turn your vision into reality.</p>
+<p class="text-on-surface-variant leading-relaxed mb-8 text-sm">I'm always open to discussing new opportunities, collaborations, or freelance projects. Whether you need a website, app, or AI-powered solution, feel free to reach out.</p>
+<div class="flex flex-col gap-4 mb-8">
+<a href="tel:8081782267" class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors text-sm"><span class="material-symbols-outlined text-primary">phone</span> 8081782267</a>
+<a href="mailto:sarthakmahi345@gmail.com" class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors text-sm"><span class="material-symbols-outlined text-primary">mail</span> sarthakmahi345@gmail.com</a>
+</div>
+<div class="p-5 rounded-2xl bg-surface-container border border-outline-variant/15">
+<p class="text-on-surface-variant text-sm italic">I will get back to you as soon as possible.<br/>Let's build something impactful together 🚀</p>
+</div>
+</div>
+<!-- Right Form -->
+<div class="p-8 rounded-3xl bg-surface-container border border-outline-variant/15">
+<h3 class="font-headline text-xl font-bold mb-6">Send a Message</h3>
+<div class="flex flex-col gap-4">
+<input id="cName" placeholder="Name" class="w-full px-4 py-3 rounded-xl bg-surface-container-high border border-outline-variant/20 text-on-surface text-sm outline-none focus:border-primary"/>
+<input id="cEmail" type="email" placeholder="Email" class="w-full px-4 py-3 rounded-xl bg-surface-container-high border border-outline-variant/20 text-on-surface text-sm outline-none focus:border-primary"/>
+<textarea id="cMessage" rows="4" placeholder="Message" class="w-full px-4 py-3 rounded-xl bg-surface-container-high border border-outline-variant/20 text-on-surface text-sm outline-none focus:border-primary resize-none"></textarea>
+<input id="cBudget" placeholder="Budget (Optional)" class="w-full px-4 py-3 rounded-xl bg-surface-container-high border border-outline-variant/20 text-on-surface text-sm outline-none focus:border-primary"/>
+<button onclick="submitContact()" class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-container py-3 rounded-xl font-bold font-headline hover:scale-[1.02] transition-transform active:scale-95">Send Message</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-32 px-8">
+<div class="max-w-5xl mx-auto text-center px-8 py-20 rounded-[3rem] bg-surface-container relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-transparent"></div>
+<div class="relative z-10">
+<h2 class="font-headline text-4xl md:text-5xl font-extrabold mb-8 tracking-tight">Let's build something<br/><span class="text-gradient">amazing together</span></h2>
+<p class="text-on-surface-variant max-w-xl mx-auto mb-10">Ready to take your project to the next level? I'm currently accepting new projects and collaborations.</p>
+<a href="https://wa.me/918081782267?text=Hi%20Sarthak%2C%20I%27d%20like%20to%20start%20a%20conversation%20about%20my%20project!" target="_blank" rel="noopener noreferrer" class="inline-block bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-12 py-5 rounded-2xl font-bold font-headline shadow-2xl hover:scale-105 transition-transform active:scale-95">
+                        Start a Conversation
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://owzrmqwewqfrkocglkrz.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enJtcXdld3FmcmtvY2dsa3J6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0NTM5NzksImV4cCI6MjA5MTAyOTk3OX0.ercJl8ldGxwHDTvt7E0j_Hxn0LqUXTmzL9Da5HXQbH4';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+let allProjects=[];
+let currentFilter='all';
+
+// SERVICES MODAL
+function openServicesModal(){const m=document.getElementById('servicesModal');m.classList.remove('hidden');m.classList.add('flex');}
+function closeServicesModal(){const m=document.getElementById('servicesModal');m.classList.add('hidden');m.classList.remove('flex');}
+
+// PROJECTS
+function filterProjects(f){
+  currentFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.toggle('bg-primary',b.dataset.filter===f);
+    b.classList.toggle('text-on-primary',b.dataset.filter===f);
+    b.classList.toggle('bg-surface-container-high',b.dataset.filter!==f);
+    b.classList.toggle('text-on-surface-variant',b.dataset.filter!==f);
+  });
+  renderProjects();
+}
+function renderProjects(){
+  const grid=document.getElementById('projectsGrid');
+  const filtered=currentFilter==='all'?allProjects:allProjects.filter(p=>p.category===currentFilter);
+  if(!filtered.length){grid.innerHTML='<p class="text-on-surface-variant col-span-2">No projects yet.</p>';return;}
+  grid.innerHTML=filtered.map(p=>`
+    <div class="group cursor-pointer" onclick="openModal(${p.id})">
+      <div class="relative aspect-[16/10] rounded-3xl overflow-hidden bg-surface-container mb-6">
+        <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="${p.img||''}" alt="${p.title}"/>
+        <div class="absolute inset-0 bg-surface/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+          <span class="bg-surface text-on-surface px-6 py-3 rounded-full font-bold">View Case Study</span>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-2">${(p.tags||[]).map(t=>`<span class="px-3 py-1 bg-surface-variant/30 rounded-full text-[10px] uppercase font-bold tracking-widest text-on-surface">${t}</span>`).join('')}</div>
+      <h4 class="font-headline text-xl font-bold mb-1">${p.title}</h4>
+      <p class="text-on-surface-variant font-label text-[0.75rem] uppercase tracking-widest">${(p.tags||[]).join(' • ')}</p>
+    </div>`).join('');
+}
+function openModal(id){
+  const p=allProjects.find(x=>x.id===id);
+  if(!p)return;
+  document.getElementById('modalImg').src=p.img||'';
+  document.getElementById('modalTitle').textContent=p.title;
+  document.getElementById('modalDesc').textContent=p.description||'';
+  document.getElementById('modalLink').href=p.link||'#';
+  const gh=document.getElementById('modalGithub');
+  if(p.github){gh.href=p.github;gh.classList.remove('hidden');}else{gh.classList.add('hidden');}
+  document.getElementById('modalTags').innerHTML=(p.tags||[]).map(t=>`<span class="px-3 py-1 bg-primary/20 rounded-full text-[10px] uppercase font-bold tracking-widest text-primary">${t}</span>`).join('');
+  const m=document.getElementById('projectModal');
+  m.classList.remove('hidden');m.classList.add('flex');
+}
+function closeModal(){
+  const m=document.getElementById('projectModal');
+  m.classList.add('hidden');m.classList.remove('flex');
+}
+document.getElementById('projectModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+// REVIEWS
+let pickedStar=0;
+document.querySelectorAll('.star-pick').forEach(s=>{
+  s.addEventListener('mouseover',()=>highlightStars(+s.dataset.v));
+  s.addEventListener('mouseout',()=>highlightStars(pickedStar));
+  s.addEventListener('click',()=>{pickedStar=+s.dataset.v;highlightStars(pickedStar);});
+});
+function highlightStars(n){
+  document.querySelectorAll('.star-pick').forEach(s=>{
+    s.style.color=+s.dataset.v<=n?'#d0bcff':'#494454';
+  });
+}
+function starsHTML(n){return '★'.repeat(n)+'☆'.repeat(5-n);}
+async function renderReviews(){
+  const {data:reviews}=await sb.from('reviews').select('*').order('created_at',{ascending:false});
+  if(!reviews||!reviews.length)return;
+  const grid=document.getElementById('reviewsGrid');
+  grid.innerHTML=reviews.map(r=>`
+    <div class="p-8 rounded-3xl bg-surface-container-low border border-outline-variant/10">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-lg">${r.name[0]}</div>
+        <div><h5 class="font-headline font-bold text-sm">${r.name}</h5><p class="text-xs text-on-surface-variant">${r.role||''}</p></div>
+      </div>
+      <div class="text-yellow-400 text-lg mb-3">${starsHTML(r.rating||5)}</div>
+      <p class="text-on-surface-variant italic leading-relaxed text-sm">"${r.text}"</p>
+    </div>`).join('');
+  const avg=(reviews.reduce((a,r)=>a+(r.rating||5),0)/reviews.length).toFixed(1);
+  document.getElementById('avgRating').textContent=avg;
+  document.getElementById('avgStars').innerHTML=`<span class="text-yellow-400 text-2xl">${starsHTML(Math.round(avg))}</span>`;
+  document.getElementById('totalReviews').textContent=reviews.length+' review'+(reviews.length!==1?'s':'');
+}
+async function submitReview(){
+  const name=document.getElementById('rName').value.trim();
+  const role=document.getElementById('rRole').value.trim();
+  const text=document.getElementById('rText').value.trim();
+  if(!name||!text||!pickedStar){alert('Please fill name, review and pick a star rating.');return;}
+  await sb.from('reviews').insert({name,role:role||'Client',text,rating:pickedStar});
+  document.getElementById('rName').value='';
+  document.getElementById('rRole').value='';
+  document.getElementById('rText').value='';
+  pickedStar=0;highlightStars(0);
+  renderReviews();
+}
+
+// CONTACT
+async function submitContact(){
+  const name=document.getElementById('cName').value.trim();
+  const email=document.getElementById('cEmail').value.trim();
+  const message=document.getElementById('cMessage').value.trim();
+  const budget=document.getElementById('cBudget').value.trim();
+  if(!name||!email||!message){alert('Please fill in Name, Email and Message.');return;}
+  await sb.from('contacts').insert({name,email,message,budget:budget||null});
+  document.getElementById('cName').value='';
+  document.getElementById('cEmail').value='';
+  document.getElementById('cMessage').value='';
+  document.getElementById('cBudget').value='';
+  alert('Message sent! I will get back to you soon 🚀');
+}
+
+// INIT
+async function init(){
+  const {data}=await sb.from('projects').select('*').order('created_at',{ascending:false});
+  allProjects=data||[];
+  renderProjects();
+  renderReviews();
+}
+init();
+</script>
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/918081782267" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-2xl hover:scale-110 transition-transform" style="background:#25D366">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="30" height="30" fill="white"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.736 5.472 2.027 7.77L0 32l8.437-2.01A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.748-1.833l-.484-.287-5.01 1.194 1.234-4.874-.317-.502A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.862c-.398-.199-2.354-1.162-2.719-1.294-.365-.133-.631-.199-.897.199-.266.398-1.03 1.294-1.263 1.56-.232.266-.465.299-.863.1-.398-.2-1.681-.62-3.203-1.977-1.184-1.057-1.983-2.362-2.215-2.76-.232-.398-.025-.613.174-.811.179-.178.398-.465.597-.698.2-.232.266-.398.398-.664.133-.266.067-.498-.033-.697-.1-.2-.897-2.162-1.23-2.96-.324-.778-.653-.672-.897-.685l-.764-.013c-.266 0-.697.1-1.063.498-.365.398-1.395 1.362-1.395 3.323s1.428 3.854 1.627 4.12c.2.266 2.81 4.29 6.808 5.846.951.366 1.694.584 2.272.748.955.27 1.824.232 2.511.14.766-.113 2.354-.962 2.686-1.89.332-.928.332-1.724.232-1.89-.1-.166-.365-.266-.763-.465z"/></svg>
+</a>
+<!-- Footer Shell -->
+<footer class="bg-surface_container_lowest w-full px-8 py-12 border-t border-outline-variant/15">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-lg font-bold text-on-surface font-headline">LaxRani AI Labs</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label text-[0.75rem] uppercase tracking-widest" href="https://www.linkedin.com/in/sarthak-srivastav-152bab344" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label text-[0.75rem] uppercase tracking-widest" href="https://www.instagram.com/laxraniailabs?igsh=YWJybXUxcnl5emM1" target="_blank" rel="noopener noreferrer">Instagram</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label text-[0.75rem] uppercase tracking-widest" href="https://github.com/sarvan0725" target="_blank" rel="noopener noreferrer">GitHub</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label text-[0.75rem] uppercase tracking-widest" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label text-[0.75rem] uppercase tracking-widest" href="#">Terms</a>
+</div>
+<p class="text-on-surface-variant font-body text-xs opacity-80">© 2024 LaxRani AI Labs. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

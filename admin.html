@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'">
+<title>Admin Panel | LaxRani AI Labs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-surface":"#e5e2e1","surface":"#131313","surface-container":"#201f1f","surface-container-high":"#2a2a2a","surface-container-highest":"#353534","surface-container-low":"#1c1b1b","surface-container-lowest":"#0e0e0e","surface-variant":"#353534","on-surface-variant":"#cbc3d7","primary":"#d0bcff","primary-container":"#a078ff","on-primary":"#3c0091","on-primary-container":"#340080","secondary":"#4cd7f6","outline":"#958ea0","outline-variant":"#494454","error":"#ffb4ab"},fontFamily:{headline:["Manrope"],body:["Inter"],label:["Inter"]}}}}</script>
+<style>
+body{font-family:'Inter',sans-serif;background:#131313;color:#e5e2e1;}
+.font-headline{font-family:'Manrope',sans-serif;}
+.text-gradient{background:linear-gradient(135deg,#d0bcff 0%,#a078ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+input,textarea,select{background:#1c1b1b;color:#e5e2e1;border:1px solid #494454;border-radius:0.75rem;padding:0.6rem 1rem;width:100%;outline:none;font-size:0.875rem;}
+input:focus,textarea:focus,select:focus{border-color:#d0bcff;}
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Login -->
+<div id="loginScreen" class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-sm p-8 rounded-3xl bg-surface-container border border-outline-variant/20">
+    <h1 class="font-headline text-2xl font-extrabold mb-2 text-center">Admin Login</h1>
+    <p class="text-on-surface-variant text-sm text-center mb-8">LaxRani AI Labs</p>
+    <input id="emailInput" type="email" placeholder="Email" class="mb-3"/>
+    <input id="pwInput" type="password" placeholder="Password" class="mb-4"/>
+    <button onclick="doLogin()" class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-container py-3 rounded-xl font-bold font-headline">Login</button>
+    <p id="loginErr" class="text-error text-xs text-center mt-3 hidden">Invalid credentials.</p>
+  </div>
+</div>
+
+<!-- Admin Panel -->
+<div id="adminPanel" class="hidden min-h-screen">
+  <div class="flex min-h-screen">
+    <aside class="w-64 bg-surface-container-lowest border-r border-outline-variant/15 flex flex-col p-6 fixed h-full z-10">
+      <div class="font-headline font-extrabold text-lg mb-10 text-gradient">LaxRani Admin</div>
+      <nav class="flex flex-col gap-2 flex-1">
+        <button onclick="showTab('projects')" class="tab-btn flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-left hover:bg-surface-container transition-all" data-tab="projects"><span class="material-symbols-outlined text-primary text-xl">work</span>Projects</button>
+        <button onclick="showTab('reviews')" class="tab-btn flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-left hover:bg-surface-container transition-all" data-tab="reviews"><span class="material-symbols-outlined text-secondary text-xl">star</span>Reviews</button>
+        <button onclick="showTab('clients')" class="tab-btn flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-left hover:bg-surface-container transition-all" data-tab="clients"><span class="material-symbols-outlined text-xl" style="color:#fbabff">group</span>Clients</button>
+      </nav>
+      <button onclick="logout()" class="flex items-center gap-2 text-on-surface-variant hover:text-error text-sm mt-4"><span class="material-symbols-outlined text-lg">logout</span>Logout</button>
+    </aside>
+    <main class="ml-64 flex-1 p-10">
+
+      <!-- Projects Tab -->
+      <div id="tab-projects" class="tab-content">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="font-headline text-2xl font-extrabold">Projects</h2>
+          <button onclick="openProjectForm()" class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-5 py-2.5 rounded-xl font-bold text-sm">+ Add Project</button>
+        </div>
+        <div id="projectsList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- Reviews Tab -->
+      <div id="tab-reviews" class="tab-content hidden">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="font-headline text-2xl font-extrabold">Reviews</h2>
+        </div>
+        <div id="reviewsList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- Clients Tab -->
+      <div id="tab-clients" class="tab-content hidden">
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="font-headline text-2xl font-extrabold">Clients</h2>
+          <button onclick="openClientForm()" class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-5 py-2.5 rounded-xl font-bold text-sm">+ Add Client</button>
+        </div>
+        <div id="clientsList" class="flex flex-col gap-4"></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Project Modal -->
+<div id="projectFormModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+  <div class="bg-surface-container rounded-3xl max-w-lg w-full p-8 border border-outline-variant/20 relative max-h-[90vh] overflow-y-auto">
+    <button onclick="closeProjectForm()" class="absolute top-4 right-4 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">close</span></button>
+    <h3 id="projectFormTitle" class="font-headline text-xl font-bold mb-6">Add Project</h3>
+    <input id="pId" type="hidden"/>
+    <div class="flex flex-col gap-3">
+      <input id="pTitle" placeholder="Project Title"/>
+      <select id="pCategory"><option value="web">Web</option><option value="mobile">Mobile</option><option value="ai">AI</option></select>
+      <input id="pTags" placeholder="Tags (comma separated)"/>
+      <input id="pImg" placeholder="Image URL"/>
+      <input id="pLink" placeholder="Live Demo URL"/>
+      <input id="pGithub" placeholder="GitHub Repo URL"/>
+      <textarea id="pDesc" rows="3" placeholder="Project description"></textarea>
+      <button onclick="saveProject()" class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-container py-3 rounded-xl font-bold font-headline mt-2">Save Project</button>
+    </div>
+  </div>
+</div>
+
+<!-- Client Modal -->
+<div id="clientFormModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+  <div class="bg-surface-container rounded-3xl max-w-lg w-full p-8 border border-outline-variant/20 relative max-h-[90vh] overflow-y-auto">
+    <button onclick="closeClientForm()" class="absolute top-4 right-4 text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined">close</span></button>
+    <h3 id="clientFormTitle" class="font-headline text-xl font-bold mb-6">Add Client</h3>
+    <input id="cId" type="hidden"/>
+    <div class="flex flex-col gap-3">
+      <input id="cName" placeholder="Client Name"/>
+      <input id="cEmail" placeholder="Client Email"/>
+      <input id="cCompany" placeholder="Company (optional)"/>
+      <input id="cProject" placeholder="Project Name"/>
+      <textarea id="cDesc" rows="3" placeholder="Project Description"></textarea>
+      <select id="cStatus">
+        <option value="pending">Pending</option>
+        <option value="in-progress">In Progress</option>
+        <option value="review">Under Review</option>
+        <option value="completed">Completed</option>
+      </select>
+      <div><label class="text-xs text-on-surface-variant mb-1 block">Progress (0-100%)</label><input id="cProgress" type="number" min="0" max="100" placeholder="e.g. 60"/></div>
+      <textarea id="cUpdates" rows="3" placeholder="Latest update / message for client"></textarea>
+      <button onclick="saveClient()" class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary-container py-3 rounded-xl font-bold font-headline mt-2">Save Client</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://owzrmqwewqfrkocglkrz.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93enJtcXdld3FmcmtvY2dsa3J6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0NTM5NzksImV4cCI6MjA5MTAyOTk3OX0.ercJl8ldGxwHDTvt7E0j_Hxn0LqUXTmzL9Da5HXQbH4';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// AUTH
+async function doLogin(){
+  const email = document.getElementById('emailInput').value.trim();
+  const pass = document.getElementById('pwInput').value;
+  const {error} = await sb.auth.signInWithPassword({email, password: pass});
+  if(error){ document.getElementById('loginErr').classList.remove('hidden'); return; }
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('adminPanel').classList.remove('hidden');
+  showTab('projects');
+}
+document.getElementById('pwInput').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+async function logout(){
+  await sb.auth.signOut();
+  document.getElementById('adminPanel').classList.add('hidden');
+  document.getElementById('loginScreen').classList.remove('hidden');
+}
+// Check existing session
+sb.auth.getSession().then(({data:{session}})=>{
+  if(session){
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('adminPanel').classList.remove('hidden');
+    showTab('projects');
+  }
+});
+
+// TABS
+function showTab(name){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.add('hidden'));
+  document.getElementById('tab-'+name).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    b.classList.toggle('bg-surface-container',b.dataset.tab===name);
+    b.classList.toggle('text-primary',b.dataset.tab===name);
+  });
+  if(name==='projects')renderProjects();
+  if(name==='reviews')renderReviews();
+  if(name==='clients')renderClients();
+}
+
+// MODAL HELPERS
+function openModal(id){const m=document.getElementById(id);m.classList.remove('hidden');m.classList.add('flex');}
+function closeModal(id){const m=document.getElementById(id);m.classList.add('hidden');m.classList.remove('flex');}
+function openProjectForm(id){
+  ['pId','pTitle','pTags','pImg','pLink','pGithub','pDesc'].forEach(x=>document.getElementById(x).value='');
+  document.getElementById('pCategory').value='web';
+  document.getElementById('projectFormTitle').textContent='Add Project';
+  if(id) loadProjectIntoForm(id);
+  openModal('projectFormModal');
+}
+function closeProjectForm(){closeModal('projectFormModal');}
+function openClientForm(id){
+  ['cId','cName','cEmail','cCompany','cProject','cDesc','cProgress','cUpdates'].forEach(x=>document.getElementById(x).value='');
+  document.getElementById('cStatus').value='pending';
+  document.getElementById('clientFormTitle').textContent='Add Client';
+  if(id) loadClientIntoForm(id);
+  openModal('clientFormModal');
+}
+function closeClientForm(){closeModal('clientFormModal');}
+document.getElementById('projectFormModal').addEventListener('click',function(e){if(e.target===this)closeProjectForm();});
+document.getElementById('clientFormModal').addEventListener('click',function(e){if(e.target===this)closeClientForm();});
+
+// PROJECTS
+async function renderProjects(){
+  const {data}=await sb.from('projects').select('*').order('created_at',{ascending:false});
+  const list=document.getElementById('projectsList');
+  if(!data||!data.length){list.innerHTML='<p class="text-on-surface-variant text-sm">No projects yet.</p>';return;}
+  list.innerHTML=data.map(p=>`
+    <div class="rounded-2xl bg-surface-container-high border border-outline-variant/15 overflow-hidden">
+      <img src="${p.img||''}" class="w-full h-36 object-cover bg-surface-container-highest"/>
+      <div class="p-4">
+        <span class="text-[10px] uppercase font-bold tracking-widest text-primary">${p.category||''}</span>
+        <h4 class="font-headline font-bold mt-1 mb-1">${p.title}</h4>
+        <p class="text-on-surface-variant text-xs mb-4 line-clamp-2">${p.description||''}</p>
+        <div class="flex gap-2">
+          <button onclick="openProjectForm(${p.id})" class="flex-1 py-2 rounded-xl bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20">Edit</button>
+          <button onclick="deleteProject(${p.id})" class="flex-1 py-2 rounded-xl bg-error/10 text-error text-xs font-bold hover:bg-error/20">Delete</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+async function loadProjectIntoForm(id){
+  const {data}=await sb.from('projects').select('*').eq('id',id).single();
+  if(!data)return;
+  document.getElementById('pId').value=data.id;
+  document.getElementById('pTitle').value=data.title||'';
+  document.getElementById('pCategory').value=data.category||'web';
+  document.getElementById('pTags').value=(data.tags||[]).join(', ');
+  document.getElementById('pImg').value=data.img||'';
+  document.getElementById('pLink').value=data.link||'';
+  document.getElementById('pGithub').value=data.github||'';
+  document.getElementById('pDesc').value=data.description||'';
+  document.getElementById('projectFormTitle').textContent='Edit Project';
+}
+async function saveProject(){
+  const title=document.getElementById('pTitle').value.trim();
+  if(!title){alert('Title required.');return;}
+  const obj={
+    title,
+    category:document.getElementById('pCategory').value,
+    tags:document.getElementById('pTags').value.split(',').map(t=>t.trim()).filter(Boolean),
+    img:document.getElementById('pImg').value.trim(),
+    link:document.getElementById('pLink').value.trim(),
+    github:document.getElementById('pGithub').value.trim(),
+    description:document.getElementById('pDesc').value.trim()
+  };
+  const id=document.getElementById('pId').value;
+  if(id) await sb.from('projects').update(obj).eq('id',id);
+  else await sb.from('projects').insert(obj);
+  closeProjectForm();
+  renderProjects();
+}
+async function deleteProject(id){
+  if(!confirm('Delete this project?'))return;
+  await sb.from('projects').delete().eq('id',id);
+  renderProjects();
+}
+
+// REVIEWS
+function starsHTML(n){return '★'.repeat(n)+'☆'.repeat(5-n);}
+async function renderReviews(){
+  const {data}=await sb.from('reviews').select('*').order('created_at',{ascending:false});
+  const list=document.getElementById('reviewsList');
+  if(!data||!data.length){list.innerHTML='<p class="text-on-surface-variant text-sm">No reviews yet.</p>';return;}
+  list.innerHTML=data.map(r=>`
+    <div class="p-6 rounded-2xl bg-surface-container-high border border-outline-variant/15">
+      <div class="flex items-center gap-3 mb-3">
+        <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">${r.name[0]}</div>
+        <div><p class="font-bold text-sm">${r.name}</p><p class="text-xs text-on-surface-variant">${r.role||''}</p></div>
+      </div>
+      <div class="text-yellow-400 text-base mb-2">${starsHTML(r.rating||5)}</div>
+      <p class="text-on-surface-variant text-xs italic mb-4">"${r.text}"</p>
+      <button onclick="deleteReview(${r.id})" class="w-full py-2 rounded-xl bg-error/10 text-error text-xs font-bold hover:bg-error/20">Delete</button>
+    </div>`).join('');
+}
+async function deleteReview(id){
+  if(!confirm('Delete this review?'))return;
+  await sb.from('reviews').delete().eq('id',id);
+  renderReviews();
+}
+
+// CLIENTS
+const STATUS_COLORS={pending:'text-yellow-400','in-progress':'text-blue-400',review:'text-purple-400',completed:'text-green-400'};
+const STATUS_LABELS={pending:'Pending','in-progress':'In Progress',review:'Under Review',completed:'Completed'};
+function generateUID(){return 'LX-'+Math.random().toString(36).substr(2,4).toUpperCase()+'-'+Date.now().toString(36).toUpperCase().substr(-4);}
+
+async function renderClients(){
+  const {data}=await sb.from('clients').select('*').order('created_at',{ascending:false});
+  const list=document.getElementById('clientsList');
+  if(!data||!data.length){list.innerHTML='<p class="text-on-surface-variant text-sm">No clients yet.</p>';return;}
+  list.innerHTML=data.map(c=>`
+    <div class="p-6 rounded-2xl bg-surface-container-high border border-outline-variant/15">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-lg">${c.name[0]}</div>
+            <div>
+              <p class="font-bold">${c.name} ${c.company?'<span class="text-on-surface-variant font-normal text-xs">· '+c.company+'</span>':''}</p>
+              <p class="text-xs text-on-surface-variant">${c.email||''}</p>
+            </div>
+          </div>
+          <p class="text-sm font-bold">${c.project}</p>
+          <p class="text-xs text-on-surface-variant mt-1 mb-2">${c.description||''}</p>
+          <div class="w-full bg-surface-container-highest rounded-full h-2 mb-1">
+            <div class="h-2 rounded-full bg-gradient-to-r from-primary to-primary-container" style="width:${c.progress||0}%"></div>
+          </div>
+          <p class="text-xs text-on-surface-variant">${c.progress||0}% complete</p>
+          ${c.updates?'<p class="text-xs text-secondary mt-2 italic">📢 '+c.updates+'</p>':''}
+        </div>
+        <div class="flex flex-col items-end gap-3 min-w-[180px]">
+          <span class="font-bold text-xs px-3 py-1 rounded-full bg-surface-container ${STATUS_COLORS[c.status]||'text-on-surface'}">${STATUS_LABELS[c.status]||c.status}</span>
+          <div class="flex items-center gap-2 bg-surface-container px-3 py-2 rounded-xl">
+            <span class="text-xs text-on-surface-variant">UID:</span>
+            <span class="font-mono font-bold text-primary text-sm">${c.uid}</span>
+            <button onclick="navigator.clipboard.writeText('${c.uid}').then(()=>alert('UID Copied!'))" class="text-on-surface-variant hover:text-primary ml-1"><span class="material-symbols-outlined text-base">content_copy</span></button>
+          </div>
+          <a href="client-portal.html?uid=${c.uid}" target="_blank" rel="noopener noreferrer" class="text-xs text-secondary underline">View Portal →</a>
+          <div class="flex gap-2">
+            <button onclick="openClientForm(${c.id})" class="px-4 py-2 rounded-xl bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20">Edit</button>
+            <button onclick="deleteClient(${c.id})" class="px-4 py-2 rounded-xl bg-error/10 text-error text-xs font-bold hover:bg-error/20">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+async function loadClientIntoForm(id){
+  const {data}=await sb.from('clients').select('*').eq('id',id).single();
+  if(!data)return;
+  document.getElementById('cId').value=data.id;
+  document.getElementById('cName').value=data.name||'';
+  document.getElementById('cEmail').value=data.email||'';
+  document.getElementById('cCompany').value=data.company||'';
+  document.getElementById('cProject').value=data.project||'';
+  document.getElementById('cDesc').value=data.description||'';
+  document.getElementById('cStatus').value=data.status||'pending';
+  document.getElementById('cProgress').value=data.progress||0;
+  document.getElementById('cUpdates').value=data.updates||'';
+  document.getElementById('clientFormTitle').textContent='Update Client';
+}
+async function saveClient(){
+  const name=document.getElementById('cName').value.trim();
+  const project=document.getElementById('cProject').value.trim();
+  if(!name||!project){alert('Name and Project required.');return;}
+  const id=document.getElementById('cId').value;
+  const obj={
+    name, project,
+    email:document.getElementById('cEmail').value.trim(),
+    company:document.getElementById('cCompany').value.trim(),
+    description:document.getElementById('cDesc').value.trim(),
+    status:document.getElementById('cStatus').value,
+    progress:parseInt(document.getElementById('cProgress').value)||0,
+    updates:document.getElementById('cUpdates').value.trim()
+  };
+  if(id){
+    await sb.from('clients').update(obj).eq('id',id);
+  } else {
+    obj.uid=generateUID();
+    await sb.from('clients').insert(obj);
+  }
+  closeClientForm();
+  renderClients();
+}
+async function deleteClient(id){
+  if(!confirm('Delete this client?'))return;
+  await sb.from('clients').delete().eq('id',id);
+  renderClients();
+}
+</script>
+</body>
+</html>
