@@ -88,7 +88,7 @@
 </head>
 <body class="bg-surface selection:bg-primary/30 selection:text-primary">
 <!-- Top Navigation Shell -->
-<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-xl shadow-2xl shadow-on-surface/5">
+<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-xl shadow-2xl shadow-on-surface/5 relative">
 <div class="flex justify-between items-center w-full px-8 py-4 max-w-7xl mx-auto">
 <div class="text-xl font-bold tracking-tight text-on-surface font-headline">LaxRani AI Labs</div>
 <!-- Desktop Nav -->
@@ -355,6 +355,12 @@ const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
 let allProjects=[];
 let currentFilter='all';
+
+// MOBILE MENU
+function toggleMenu(){
+  const m=document.getElementById('mobileMenu');
+  m.classList.toggle('hidden');
+}
 
 // SERVICES MODAL
 function openServicesModal(){const m=document.getElementById('servicesModal');m.classList.remove('hidden');m.classList.add('flex');}
