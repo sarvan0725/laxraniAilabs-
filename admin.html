@@ -273,7 +273,7 @@ async function deleteProject(id){
 }
 
 // REVIEWS
-function starsHTML(n){return 'â˜…'.repeat(n)+'â˜†'.repeat(5-n);}
+function starsHTML(n){return '★'.repeat(n)+'☆'.repeat(5-n);}
 async function renderReviews(){
   const {data}=await sb.from('reviews').select('*').order('created_at',{ascending:false});
   const list=document.getElementById('reviewsList');
@@ -311,7 +311,7 @@ async function renderClients(){
           <div class="flex items-center gap-3 mb-2">
             <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-lg">${c.name[0]}</div>
             <div>
-              <p class="font-bold">${c.name} ${c.company?'<span class="text-on-surface-variant font-normal text-xs">Â· '+c.company+'</span>':''}</p>
+              <p class="font-bold">${c.name} ${c.company?'<span class="text-on-surface-variant font-normal text-xs">· '+c.company+'</span>':''}</p>
               <p class="text-xs text-on-surface-variant">${c.email||''}</p>
             </div>
           </div>
@@ -321,7 +321,7 @@ async function renderClients(){
             <div class="h-2 rounded-full bg-gradient-to-r from-primary to-primary-container" style="width:${c.progress||0}%"></div>
           </div>
           <p class="text-xs text-on-surface-variant">${c.progress||0}% complete</p>
-          ${c.updates?'<p class="text-xs text-secondary mt-2 italic">ðŸ“¢ '+c.updates+'</p>':''}
+          ${c.updates?'<p class="text-xs text-secondary mt-2 italic">📢 '+c.updates+'</p>':''}
         </div>
         <div class="flex flex-col items-end gap-3 min-w-[180px]">
           <span class="font-bold text-xs px-3 py-1 rounded-full bg-surface-container ${STATUS_COLORS[c.status]||'text-on-surface'}">${STATUS_LABELS[c.status]||c.status}</span>
@@ -330,7 +330,7 @@ async function renderClients(){
             <span class="font-mono font-bold text-primary text-sm">${c.uid}</span>
             <button onclick="navigator.clipboard.writeText('${c.uid}').then(()=>alert('UID Copied!'))" class="text-on-surface-variant hover:text-primary ml-1"><span class="material-symbols-outlined text-base">content_copy</span></button>
           </div>
-          <a href="client-portal.html?uid=${c.uid}" target="_blank" rel="noopener noreferrer" class="text-xs text-secondary underline">View Portal â†’</a>
+          <a href="client-portal.html?uid=${c.uid}" target="_blank" rel="noopener noreferrer" class="text-xs text-secondary underline">View Portal →</a>
           <div class="flex gap-2">
             <button onclick="openClientForm(${c.id})" class="px-4 py-2 rounded-xl bg-primary/10 text-primary text-xs font-bold hover:bg-primary/20">Edit</button>
             <button onclick="deleteClient(${c.id})" class="px-4 py-2 rounded-xl bg-error/10 text-error text-xs font-bold hover:bg-error/20">Delete</button>
